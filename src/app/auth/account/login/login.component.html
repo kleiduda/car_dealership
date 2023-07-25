@@ -1,0 +1,54 @@
+<app-default-layout2>
+    <!-- title-->
+    <h4 class="mt-0">Entrar</h4>
+
+    <app-ui-preloader [display]="loading"></app-ui-preloader>
+    <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
+    <!-- form -->
+    <form name="login-form2" [formGroup]="loginForm2" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="emailaddress" class="form-label">Email</label>
+            <input class="form-control" type="email" id="emailaddress" required placeholder="Entre com seu email"
+                formControlName="email" [ngClass]="{'is-invalid': formSubmitted && formValues.email.invalid}">
+
+            <div *ngIf="formSubmitted && formValues.email.invalid" class="invalid-feedback">
+
+                <div *ngIf="formValues.email.errors?.required">
+                    Email é obrigatório.
+                </div>
+                <div *ngIf="formValues.email.errors?.email">
+                    Digite um email válido.
+                </div>
+
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <div class="input-group input-group-merge">
+                <input [type]="showPassword? 'text' : 'password'" id="password" class="form-control"
+                    placeholder="Enter your password" formControlName="password" required minlength="4"
+                    [ngClass]="{'is-invalid': formSubmitted && formValues.password.invalid}">
+                <div class="input-group-text" (click)="showPassword=!showPassword">
+                    <span class="password-eye"></span>
+                </div>
+                <div *ngIf="formSubmitted && formValues.password.invalid" class="invalid-feedback">
+
+                    <div *ngIf="formValues.password.errors?.required">
+                        Senha é obrigatório.
+                    </div>
+                    <div *ngIf="formValues.password.errors?.minlength">
+                        Senha deve ter mais de 3 caracteres.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center d-grid">
+            <button class="btn btn-primary" type="submit">ENTRAR </button>
+        </div>
+        
+    </form>
+    <!-- end form-->
+
+</app-default-layout2>
